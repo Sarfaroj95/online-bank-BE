@@ -3,6 +3,7 @@ package com.online_bank.app.onlinebanking.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -40,5 +41,13 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String nationalId;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
 }

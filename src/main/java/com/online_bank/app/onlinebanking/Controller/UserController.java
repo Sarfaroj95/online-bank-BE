@@ -22,7 +22,7 @@ public class UserController {
            userRepositoty.save(user);
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public List<User> getAllUser(){
          return userRepositoty.findAll();
     }
