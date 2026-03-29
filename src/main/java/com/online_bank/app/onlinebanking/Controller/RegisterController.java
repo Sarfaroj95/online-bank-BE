@@ -73,7 +73,7 @@ public class RegisterController {
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(new java.util.HashMap<String, Object>() {{
                 put("type", "success");
-                put("message", "Operation completed successfully — everything worked as intended");
+                put("message", "Registration successful");
             }});
     }
 
