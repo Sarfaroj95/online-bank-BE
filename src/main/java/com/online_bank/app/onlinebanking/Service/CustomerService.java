@@ -1,8 +1,11 @@
 package com.online_bank.app.onlinebanking.Service;
 
+import com.online_bank.app.onlinebanking.Common.Dto.CustomerStatusDTO;
+import com.online_bank.app.onlinebanking.Common.Enums.AccountStatus;
 import com.online_bank.app.onlinebanking.Entity.CustomerEntity;
 import com.online_bank.app.onlinebanking.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +37,28 @@ public class CustomerService {
     }
 
 
+    public CustomerEntity updateCustomerStatus(Long customer_id, CustomerStatusDTO request) {
+        CustomerEntity customer = customerRepository.findById(customer_id)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customer_id));
+        customer.setIsVerificationStatus(AccountStatus.valueOf(String.valueOf(request.getIsVerificationStatus())));
+        customer.setIsActive(request.getIsActive());
+        return customerRepository.save(customer);
+    }
+
+
+//    public CustomerEntity updateSatusCustomer(Long customerId, String isVerificationStatus, Boolean isActive) {
+//        CustomerEntity customer = customerRepository.findById(customerId)
+//                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
+//
+//        if (isVerificationStatus != null) {
+//            customer.setIsVerificationStatus(AccountStatus.valueOf(isVerificationStatus));
+//        }
+//
+//        if (isActive != null) {
+//            customer.setIsActive(isActive);
+//        }
+//
+//        return customerRepository.save(customer);
+//    }
 
 }
